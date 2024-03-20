@@ -53,3 +53,17 @@ export const getAuthorById = async (id) => {
   console.log(redactores)
   return redactores
 }
+
+export const getArticleBySlug = async (slug) => {
+  let { data: articulos, error } = await supabase
+    .from("articulos")
+    .select("*")
+    .eq("slug", slug)
+
+  if (error) {
+    console.log(error)
+  }
+
+  console.log(articulos)
+  return articulos
+}

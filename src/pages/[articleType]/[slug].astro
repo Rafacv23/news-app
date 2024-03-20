@@ -1,0 +1,9 @@
+---
+const { articleType, slug } = Astro.params;
+import Reading from '../../components/Reading.astro';
+import {getArticleBySlug} from '../../lib/api.js'
+
+const articles = await getArticleBySlug(slug);
+const article = articles[0]
+---
+<Reading article={article}/>
