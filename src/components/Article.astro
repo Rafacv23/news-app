@@ -1,18 +1,23 @@
 ---
 const {article} = Astro.props
 import {getAuthorById} from '../lib/api.js'
+import {dateFormatter} from '../lib/utils/dateFormatter.js'
 
 const author = await getAuthorById(article.created_by_id)
+
+const published = dateFormatter(article.published_at)
 ---
 
 <article>
-    <img src={article.img} alt={article.img_alternate} width="200px"/>
+    <img src={article.img} alt={article.img_alternate} width="320px" height="182px"/>
     <section>
-        <a href=`/${article.type}` title={article.type}>{article.type}</a>
+        <a href=`/${article.type}` title={article.type}>{article.type.toUpperCase()}</a>
         <a href=`/${article.type}/${article.slug}`>{article.title}</a>
-        <img src={author.avatar} width="60px" alt=`${author.name} avatar` />
-        <h4>{author.name}</h4>
-        <p>{article.published_at}</p>
+        <section id="author-info">
+            <img src={author.avatar} width="46px" height="46px" alt=`${author.name} avatar` />
+            <h4>{author.name}</h4>
+            <p>{published}</p>
+        </section>
     </section>
 </article>
 
@@ -24,5 +29,13 @@ const author = await getAuthorById(article.created_by_id)
     section{
         display: flex;
         flex-direction: column;
+    }
+
+    #author-info{
+        display: flex;
+        flex-direction: row;;
+        gap: 1rem;
+        align-items: center;
+        justify-content: center;
     }
 </style>
