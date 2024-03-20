@@ -13,14 +13,15 @@ import {getArticlesByType} from "../lib/api.js"
 
 const articles = await getArticlesByType(articleType)
 import Layout from "../layouts/Layout.astro"
+import Article from '../components/Article.astro'
 ---
 
 <Layout title={articleType}>
         <main>
-            <h1>{articleType}</h1>
+            <h1>{articleType.toUpperCase()}</h1>
             <ul>
                 {articles.map((articulo) => (
-                    <li>{articulo.title}</li>
+                    <Article article={articulo}/>
                 ))}
         </ul>
     </main>
