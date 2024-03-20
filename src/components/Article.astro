@@ -2,16 +2,27 @@
 const {article} = Astro.props
 import {getAuthorById} from '../lib/api.js'
 
-const authors = await getAuthorById(article.created_by_id)
+const author = await getAuthorById(article.created_by_id)
 ---
 
 <article>
     <img src={article.img} alt={article.img_alternate} width="200px"/>
-    <a href=`/${article.type}` title={article.type}>{article.type}</a>
-    <a href=`/${article.type}/${article.slug}`>{article.title}</a>
-    {authors.map((author) => (
+    <section>
+        <a href=`/${article.type}` title={article.type}>{article.type}</a>
+        <a href=`/${article.type}/${article.slug}`>{article.title}</a>
         <img src={author.avatar} width="60px" alt=`${author.name} avatar` />
         <h4>{author.name}</h4>
-    ))}
-    <p>{article.published_at}</p>
+        <p>{article.published_at}</p>
+    </section>
 </article>
+
+<style>
+    article{
+        display: flex;
+        gap: 1rem;
+    }
+    section{
+        display: flex;
+        flex-direction: column;
+    }
+</style>
