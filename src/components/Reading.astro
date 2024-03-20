@@ -3,8 +3,7 @@ import Layout from "../layouts/Layout.astro"
 import { getAuthorById } from "../lib/api"
 
 const {article} = Astro.props
-const authors = await getAuthorById(article.created_by_id)
-const author = authors[0]
+const author = await getAuthorById(article.created_by_id)
 ---
 
 <Layout title={article.title}>

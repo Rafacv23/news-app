@@ -50,8 +50,9 @@ export const getAuthorById = async (id) => {
     console.log(error)
   }
 
-  console.log(redactores)
-  return redactores
+  const redactor = redactores[0]
+  console.log(redactor)
+  return redactor
 }
 
 export const getArticleBySlug = async (slug) => {
