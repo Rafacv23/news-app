@@ -1,0 +1,16 @@
+---
+const {article} = Astro.props
+import {getAuthorById} from '../lib/api.js'
+
+const authors = await getAuthorById(article.created_by_id)
+---
+
+<article>
+    <img/>
+    <h4>{article.type}</h4>
+    <h2>{article.title}</h2>
+    {authors.map((author) => (
+        <h4>{author.name}</h4>
+    ))}
+    <p>{article.published_at}</p>
+</article>
