@@ -1,0 +1,42 @@
+---
+const {author, published} = Astro.props
+---
+
+<section id="author-info">
+    <img src={author.avatar} width="46px" height="46px" alt=`${author.name} avatar` />
+        <div>
+            <h4 id="author-name" class="author">{author.name}</h4>
+            <h4 class="author">{published}</h4>
+        </div>
+</section>
+
+<style>
+
+    img{
+        border-radius: 2rem;
+    }
+        #author-info{
+        display: flex;
+        flex-direction: row;;
+        gap: 1rem;
+        align-items: end;
+        justify-content: start;
+        margin-bottom: 1rem;
+    }
+
+    div{
+        display: flex; 
+        flex-direction: column;
+    }
+    .author{
+        font-size: 1rem;
+        font-weight: lighter;
+        margin: 0;
+    }
+
+    #author-name:hover{
+        color: #FD6C3E;
+        transition: .5s;
+        cursor: pointer;
+    }
+</style>
