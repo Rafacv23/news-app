@@ -1,0 +1,11 @@
+---
+import {getCategories} from '../lib/api.js'
+
+const categorias = await getCategories()
+---
+
+<nav>
+    {categorias.map((categoria) => (
+        <li>{categoria.name}</li>
+    ))}
+</nav>
