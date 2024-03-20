@@ -1,0 +1,27 @@
+---
+export function getStaticPaths() {
+  return [
+    {params: {articleType: 'noticias'}},
+    {params: {articleType: 'analisis'}},
+    {params: {articleType: 'articulos'}},
+  ];
+}
+
+const { articleType } = Astro.params;
+
+import {getArticlesByType} from "../lib/api.js"
+
+const articles = await getArticlesByType(articleType)
+import Layout from "../layouts/Layout.astro"
+---
+
+<Layout title={articleType}>
+        <main>
+            <h1>{articleType}</h1>
+            <ul>
+                {articles.map((articulo) => (
+                    <li>{articulo.title}</li>
+                ))}
+        </ul>
+    </main>
+</Layout>
