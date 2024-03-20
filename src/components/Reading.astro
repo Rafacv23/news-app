@@ -1,16 +1,37 @@
 ---
 import Layout from "../layouts/Layout.astro"
 import { getAuthorById } from "../lib/api"
+import { dateFormatter } from "../lib/utils/dateFormatter"
+import AuthorInfo from "./AuthorInfo.astro"
 
 const {article} = Astro.props
 const author = await getAuthorById(article.created_by_id)
+const published = dateFormatter(article.published_at)
 ---
 
 <Layout title={article.title}>
     <main>
-        <img src={article.img} alt={article.img_alternate} width="200px"/>
+        <img id="cabecera-img" src={article.img} alt={article.img_alternate}/>
+        <a href={`/${article.type}`} title={article.type} id="article-type">{article.type.toUpperCase()}</a>
         <h1>{article.title}</h1>
-        <p>{author.name}</p>
+        <h3>Aqui deberia ir un subtitulo // añadir a la base de datos</h3>
+        <AuthorInfo author={author} published={published}/>
         <article>{article.body}</article>
     </main>
 </Layout>
+
+<style>
+    #cabecera-img{
+        width: 100%;
+        max-width: 1200px;
+        height: auto;
+    }
+        #article-type{
+        color: #6ADFCD;
+        font-weight: bold;
+    }
+
+    #article-type:hover{
+        text-decoration: underline;
+    }
+</style>

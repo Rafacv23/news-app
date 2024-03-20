@@ -6,6 +6,28 @@ const categorias = await getCategories()
 
 <nav>
     {categorias.map((categoria) => (
-        <li>{categoria.name}</li>
+        <a href=`/${categoria.name.toLowerCase()}` title={categoria.name}>{categoria.name}</a>
     ))}
 </nav>
+
+<style>
+    nav{
+        display: flex;
+        align-items: center;
+        justify-content: left;
+    }
+    a{
+        list-style: none;
+        border: 2px solid aliceblue;
+        border-radius: 2rem;
+        padding: .5rem 1rem;
+        transition: .5s;
+    }
+
+    a:hover{
+        color: #FD6C3E;
+        border: 2px solid #FD6C3E;
+        cursor: pointer;
+        transition: .5s;
+    }
+</style>

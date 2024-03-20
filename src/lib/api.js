@@ -13,6 +13,21 @@ export const getCategories = async () => {
   return categorias
 }
 
+export const getCategoryByName = async (name) => {
+  let { data: categorias, error } = await supabase
+    .from("categorias")
+    .select("*")
+    .eq("name", name)
+
+  if (error) {
+    console.error(error)
+  }
+
+  const category = categorias[0]
+  console.log(category)
+  return category
+}
+
 export const getArticlesByType = async (type) => {
   // función que recoge los artículos de la api en función del tipo que estos tengan asignado.
 
@@ -67,4 +82,17 @@ export const getArticleBySlug = async (slug) => {
 
   console.log(articulos)
   return articulos
+}
+
+export const getArticlesByCategory = async (category) => {
+  let { data: articulos_categorias_links, error } = await supabase
+    .from("articulos_categorias_links")
+    .select("*")
+    .eq("categoria_id", category)
+
+  if (error) {
+    console.log(error)
+  }
+
+  console.log(articulos_categorias_links)
 }
