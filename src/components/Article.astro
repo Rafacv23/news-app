@@ -6,10 +6,11 @@ const authors = await getAuthorById(article.created_by_id)
 ---
 
 <article>
-    <img/>
-    <h4>{article.type}</h4>
-    <h2>{article.title}</h2>
+    <img src={article.img} alt={article.img_alternate} width="200px"/>
+    <a href=`/${article.type}` title={article.type}>{article.type}</a>
+    <a href=`/${article.type}/${article.slug}`>{article.title}</a>
     {authors.map((author) => (
+        <img src={author.avatar} width="60px" alt=`${author.name} avatar` />
         <h4>{author.name}</h4>
     ))}
     <p>{article.published_at}</p>
