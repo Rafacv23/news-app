@@ -1,0 +1,17 @@
+---
+import Layout from "../layouts/Layout.astro"
+import { getAuthorById } from "../lib/api"
+
+const {article} = Astro.props
+const authors = await getAuthorById(article.created_by_id)
+const author = authors[0]
+---
+
+<Layout title={article.title}>
+    <main>
+        <img src={article.img} alt={article.img_alternate} width="200px"/>
+        <h1>{article.title}</h1>
+        <p>{author.name}</p>
+        <article>{article.body}</article>
+    </main>
+</Layout>
