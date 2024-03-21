@@ -15,6 +15,7 @@ const articles = await getArticlesByType(articleType)
 import Layout from "../layouts/Layout.astro"
 import Article from '../components/Article.astro'
 import Categorias from "../components/Categorias.astro";
+import PageControls from '../components/PageControls.astro';
 ---
 
 <Layout title={articleType}>
@@ -25,5 +26,6 @@ import Categorias from "../components/Categorias.astro";
                     <Article article={articulo}/>
                 ))}
         </ul>
+        <PageControls pageType={articleType} pageNum = 1/>
     </main>
 </Layout>
