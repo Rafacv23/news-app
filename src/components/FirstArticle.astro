@@ -1,0 +1,57 @@
+---
+const {article} = Astro.props
+import AuthorInfo from "./AuthorInfo.astro";
+import { getAuthorById } from "../lib/api";
+import { dateFormatter } from "../lib/utils/dateFormatter";
+const author = await getAuthorById(article.created_by_id)
+const published = dateFormatter(article.published_at)
+---
+
+<main>
+    <section>
+        <a href=`/${article.type}` title={article.type} id="article-type">{article.type.toUpperCase()}</a>
+        <a id="title" href=`/${article.type}/${article.slug}`>{article.title}</a>
+        <p>{article.body.substring(0, 100)} ...</p>
+        <div>
+        <a href=`/${article.type}/${article.slug}`>Leer más</a>
+        <AuthorInfo author={author} published={published}/>
+    </div>
+    </section>
+    <img loading="lazy" src={article.img} alt={article.img_alternate}/>
+</main>
+
+<style>
+    main{
+        display: flex;
+        margin-bottom: 3rem;
+        margin-top: 1.5rem;
+        gap: 2rem;
+    }
+    @media screen and (max-width: 1000px) {
+        main {
+            display: flex;
+            flex-direction: column; /* Cambia a 2 columnas cuando el ancho de la pantalla sea menor o igual a 768px */
+        }
+    }
+    img{
+        max-width: 625px;
+        max-height: 300px;
+        height: auto;
+    }
+    section{
+        display: flex;
+        flex-direction: column;
+    }
+    #title{
+        font-size: 2rem;
+        font-weight: bold;
+    }
+    #article-type{
+        color: #6ADFCD;
+    }
+    div{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+</style>
