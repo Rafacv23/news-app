@@ -35,6 +35,7 @@ export const getArticlesByType = async (type) => {
     .from("articulos")
     .select("*")
     .eq("type", type)
+    .order("published_at", { ascending: false })
 
   if (error) {
     console.log(error)
@@ -45,7 +46,10 @@ export const getArticlesByType = async (type) => {
 }
 
 export const getArticles = async () => {
-  let { data: articulos, error } = await supabase.from("articulos").select("*")
+  let { data: articulos, error } = await supabase
+    .from("articulos")
+    .select("*")
+    .order("published_at", { ascending: false })
 
   if (error) {
     console.log(error)
