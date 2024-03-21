@@ -10,7 +10,7 @@ const published = dateFormatter(article.published_at)
 ---
 
 <article>
-    <img src={article.img} alt={article.img_alternate} width="320px" height="182px"/>
+    <img loading="lazy" src={article.img} alt={article.img_alternate} width="320px" height="182px"/>
     <section>
         <a href=`/${article.type}` title={article.type} id="article-type">{article.type.toUpperCase()}</a>
         <a id="title" href=`/${article.type}/${article.slug}`>{article.title}</a>
@@ -22,6 +22,7 @@ const published = dateFormatter(article.published_at)
     article{
         display: flex;
         gap: 1rem;
+        margin-bottom: 2rem;
     }
     section{
         display: flex;
