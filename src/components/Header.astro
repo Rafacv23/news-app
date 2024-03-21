@@ -3,7 +3,27 @@
     <a href="/noticias" title="Noticias">Noticias</a>
     <a href="/analisis" title="Análisis">Análisis</a>
     <a href="/articulos" title="Artículos">Artículos</a>
+    <input type="text" placeholder="Buscar" name="search" id="search"/>
+    <button id="search-btn">Buscar</button>
 </header>
+
+<script>
+    function buscar() {
+        const searchInput = document.getElementById("search");
+        const query = searchInput.value.trim();
+        if (query) {
+                // Handle redirection here
+                window.location.href = `/search/${encodeURIComponent(query)}`;
+            } else {
+                console.error("No se encontraron resultados para la búsqueda:", query);
+                // You can display an error message or take another action as needed
+            }
+        }
+    
+
+    const $searchBtn = document.getElementById("search-btn");
+    $searchBtn.addEventListener("click", buscar);
+</script>
 
 <style>
     header{
