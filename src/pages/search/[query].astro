@@ -1,0 +1,23 @@
+---
+const { query } = Astro.params;
+
+import Layout from "../../layouts/Layout.astro"
+import Article from '../../components/Article.astro'
+import { searchEngine } from "../../lib/api";
+import PageControls from "../../components/PageControls.astro";
+
+let articles = []
+articles = await searchEngine(query)
+---
+
+<Layout title='Búsquedas'>
+  <main>
+    <h1>Búsquedas</h1>
+            <ul>
+                {articles.map((articulo) => (
+                    <Article article={articulo}/>
+                ))}
+        </ul>
+        <PageControls query={query} search="true" pageNum=1/>
+    </main>
+</Layout>

@@ -1,0 +1,22 @@
+---
+const { articleType, pageNum } = Astro.params;
+
+import { getArticlesByPageAndType } from "../../../lib/api.js";
+import Layout from "../../../layouts/Layout.astro"
+import Article from '../../../components/Article.astro'
+import PageControls from '../../../components/PageControls.astro';
+
+const articles = await getArticlesByPageAndType(pageNum, articleType)
+---
+
+<Layout title={articleType}>
+  <main>
+    <h1>{articleType.toUpperCase()}</h1>
+            <ul>
+                {articles.map((articulo) => (
+                    <Article article={articulo}/>
+                ))}
+        </ul>
+        <PageControls pageType={articleType} pageNum ={pageNum}/>
+    </main>
+</Layout>
