@@ -35,6 +35,7 @@ export const getArticlesByType = async (type) => {
     .from("articulos")
     .select("*")
     .eq("type", type)
+    .limit(10)
     .order("published_at", { ascending: false })
 
   if (error) {
@@ -99,4 +100,60 @@ export const getArticlesByCategory = async (category) => {
   }
 
   console.log(articulos_categorias_links)
+}
+
+export const searchEngine = async (query) => {
+  try {
+    let { data: articulos, error } = await supabase
+      .from("articulos")
+      .select("*")
+      .ilike("title", `%${query}%`) // Utilizando el parámetro query para la búsqueda
+
+    if (error) {
+      throw error
+    }
+
+    console.log(articulos)
+    return articulos
+  } catch (error) {
+    console.error("Error al realizar la búsqueda:", error.message)
+    return null // O puedes manejar el error de otra manera según tus necesidades
+  }
+}
+
+export const getArticlesByPage = async (page) => {
+  const pageSize = 10
+  const startIndex = (page - 1) * pageSize
+  const endIndex = startIndex + pageSize
+  let { data: articulos, error } = await supabase
+    .from("articulos")
+    .select("*")
+    .order("published_at", { ascending: false })
+    .limit(10)
+    .range(startIndex, endIndex)
+
+  if (error) {
+    console.log(error)
+  }
+  console.log(articulos)
+  return articulos
+}
+
+export const getArticlesByPageAndType = async (page, type) => {
+  const pageSize = 10
+  const startIndex = (page - 1) * pageSize
+  const endIndex = startIndex + pageSize
+  let { data: articulos, error } = await supabase
+    .from("articulos")
+    .select("*")
+    .eq("type", type)
+    .order("published_at", { ascending: false })
+    .limit(10)
+    .range(startIndex, endIndex)
+
+  if (error) {
+    console.log(error)
+  }
+  console.log(articulos)
+  return articulos
 }
