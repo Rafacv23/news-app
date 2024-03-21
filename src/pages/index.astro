@@ -1,17 +1,67 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getArticles } from '../lib/api';
-import Article from "../components/Article.astro"
+import ArticleList from "../components/home/ArticleList.astro"
+import FirstArticle from '../components/FirstArticle.astro'
+import { getArticlesByType } from '../lib/api';
+
+const latestReviews = await getArticlesByType('analisis')
+const latestArticles = await getArticlesByType('articulos')
+const latestNews = await getArticlesByType('noticias')
 
 const articles = await getArticles()
+const firstArticle = articles[0]
+const restArticles = articles.slice(1,4)
 ---
 
 <Layout title="Welcome to Astro.">
 	<main>
+		<FirstArticle article={firstArticle}/>
+	<h3>Últimos posts</h3>
 		<ul>
-			{articles.map((articulo) =>(
-				<Article article={articulo}/>
+			{restArticles.map((articulo) =>(
+				<ArticleList article={articulo}/>
+			))}
+		</ul>
+		<a href="/noticias" title="Noticias">Últimas Noticias</a>
+		<ul>
+			{latestNews.map((articulo) =>(
+				<ArticleList article={articulo}/>
+			))}
+		</ul>
+	<a href="/analisis" title="Análisis">Últimos Análisis</a>
+		<ul>
+			{latestReviews.map((articulo) =>(
+				<ArticleList article={articulo}/>
+			))}
+		</ul>
+		<a href="/articulos" title="Artículos">Últimos Artículos</a>
+		<ul>
+			{latestArticles.map((articulo) =>(
+				<ArticleList article={articulo}/>
 			))}
 		</ul>
 	</main>
 </Layout>
+
+<style>
+ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Crea 3 columnas de igual ancho por defecto */
+    grid-gap: 20px;
+}
+
+@media screen and (max-width: 1000px) {
+    ul {
+        grid-template-columns: repeat(2, 1fr); /* Cambia a 2 columnas cuando el ancho de la pantalla sea menor o igual a 768px */
+    }
+}
+
+@media screen and (max-width: 700px) {
+    ul {
+        display: flex;
+		flex-direction: column; /* Cambia a 1 columna cuando el ancho de la pantalla sea menor o igual a 480px */
+    }
+}
+
+</style>
