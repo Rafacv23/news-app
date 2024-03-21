@@ -1,0 +1,51 @@
+---
+const {article} = Astro.props
+import {getAuthorById} from '../../lib/api.js'
+import {dateFormatter} from '../../lib/utils/dateFormatter.js'
+import AuthorInfo from '../AuthorInfo.astro'
+
+const author = await getAuthorById(article.created_by_id)
+
+const published = dateFormatter(article.published_at)
+---
+
+<article>
+    <img loading="lazy" src={article.img} alt={article.img_alternate}/>
+    <section>
+        <a href=`/${article.type}` title={article.type} id="article-type">{article.type.toUpperCase()}</a>
+        <a id="title" href=`/${article.type}/${article.slug}`>{article.title}</a>
+        <AuthorInfo author={author} published={published}/>
+    </section>
+</article>
+
+<style>
+    article{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        width: auto;
+    }
+    img{
+        max-width: 320px;
+        max-height: 182px;
+        height: auto;
+    }
+    section{
+        display: flex;
+        flex-direction: column;
+        height: 182px;
+        align-items: start;
+        justify-content: end;
+    }
+
+    #title{
+        font-weight: bold;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    #article-type{
+        color: #6ADFCD;
+    }
+</style>
