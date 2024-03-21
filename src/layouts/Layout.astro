@@ -5,6 +5,7 @@ interface Props {
 
 const { title } = Astro.props;
 import Header from "../components/Header.astro"
+import { ViewTransitions } from "astro:transitions";
 ---
 
 <!doctype html>
@@ -16,10 +17,11 @@ import Header from "../components/Header.astro"
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<ViewTransitions />
 	</head>
 	<body>
 		<Header/>
-		<slot />
+		<slot  />
 	</body>
 </html>
 <style is:global>
@@ -44,7 +46,7 @@ import Header from "../components/Header.astro"
 	main {
 		margin: auto;
 		padding: 1rem;
-		width: 800px;
+		width: 1000px;
 		max-width: calc(100% - 2rem);
 		color: white;
 		font-size: 20px;
@@ -64,6 +66,10 @@ import Header from "../components/Header.astro"
 	a{
 		text-decoration: none;
 		color: aliceblue;
+	}
+
+	ul{
+		padding: 0;
 	}
 
 	a:hover{
