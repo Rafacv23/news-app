@@ -3,10 +3,17 @@ import Layout from "../layouts/Layout.astro"
 import { getAuthorById } from "../lib/api"
 import { dateFormatter } from "../lib/utils/dateFormatter"
 import AuthorInfo from "./AuthorInfo.astro"
+import { unified } from 'unified'
+import remarkParse from 'remark-parse'
+import remarkHtml from 'remark-html'
 
 const {article} = Astro.props
 const author = await getAuthorById(article.created_by_id)
 const published = dateFormatter(article.published_at)
+
+// Convertir Markdown a HTML
+const processor = unified().use(remarkParse).use(remarkHtml)
+const htmlContent = await processor.process(article.body)
 ---
 
 <Layout title={article.title}>
@@ -16,7 +23,7 @@ const published = dateFormatter(article.published_at)
         <h1>{article.title}</h1>
         <h3>Aqui deberia ir un subtitulo // añadir a la base de datos</h3>
         <AuthorInfo author={author} published={published}/>
-        <article>{article.body}</article>
+        <article>{htmlContent}</article>
     </main>
 </Layout>
 
