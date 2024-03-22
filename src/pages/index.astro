@@ -11,40 +11,60 @@ const latestNews = await getArticlesByType('noticias')
 
 const articles = await getArticles()
 const firstArticle = articles[0]
-const restArticles = articles.slice(1,4)
+const lastNew = latestNews[0]
+const restNews = latestNews.slice(1,4)
+const lastReview = latestReviews[0]
+const restReviews = latestReviews.slice(1,4)
+const lastArticle = latestArticles[0]
+const restArticles = latestArticles.slice(1,4)
+const rest = articles.slice(1,4)
 ---
 
 <Layout title="Welcome to Astro.">
 	<main>
 		<FirstArticle article={firstArticle}/>
+	<section>
 	<h3>Últimos posts</h3>
+		<ul>
+			{rest.map((articulo) =>(
+				<ArticleList article={articulo}/>
+			))}
+		</ul>
+	</section>
+	<FirstArticle article={lastNew}/>
+	<section>
+		<a href="/noticias" title="Noticias">Últimas Noticias</a>
+		<ul>
+			{restNews.map((articulo) =>(
+				<ArticleList article={articulo}/>
+			))}
+		</ul>
+	</section>
+	<FirstArticle article={lastReview}/>
+	<section>
+	<a href="/analisis" title="Análisis">Últimos Análisis</a>
+		<ul>
+			{restReviews.map((articulo) =>(
+				<ArticleList article={articulo}/>
+			))}
+		</ul>
+	</section>
+	<FirstArticle article={lastArticle}/>
+	<section>
+		<a href="/articulos" title="Artículos">Últimos Artículos</a>
 		<ul>
 			{restArticles.map((articulo) =>(
 				<ArticleList article={articulo}/>
 			))}
 		</ul>
-		<a href="/noticias" title="Noticias">Últimas Noticias</a>
-		<ul>
-			{latestNews.map((articulo) =>(
-				<ArticleList article={articulo}/>
-			))}
-		</ul>
-	<a href="/analisis" title="Análisis">Últimos Análisis</a>
-		<ul>
-			{latestReviews.map((articulo) =>(
-				<ArticleList article={articulo}/>
-			))}
-		</ul>
-		<a href="/articulos" title="Artículos">Últimos Artículos</a>
-		<ul>
-			{latestArticles.map((articulo) =>(
-				<ArticleList article={articulo}/>
-			))}
-		</ul>
+	</section>
 	</main>
 </Layout>
 
 <style>
+	section{
+		background: radial-gradient(to top, #05050a 80%, white);
+	}
 ul {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* Crea 3 columnas de igual ancho por defecto */
