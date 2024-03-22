@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.8",
-    "astro": "^4.5.7"
+    "astro": "^4.5.7",
+    "remark-html": "^16.0.1",
+    "remark-parse": "^11.0.0",
+    "unified": "^11.0.4"
   }
 }
