@@ -1,10 +1,7 @@
 ---
 const {article} = Astro.props
-import {getAuthorById} from '../../lib/api.js'
 import {dateFormatter} from '../../lib/utils/dateFormatter.js'
-import AuthorInfo from '../AuthorInfo.astro'
-
-const author = await getAuthorById(article.created_by_id)
+import AuthorInfoVariant from './AuthorInfoVariant.astro'
 
 const published = dateFormatter(article.published_at)
 ---
@@ -14,7 +11,7 @@ const published = dateFormatter(article.published_at)
     <section>
         <a href=`/${article.type}` title={article.type} id="article-type">{article.type.toUpperCase()}</a>
         <a id="title" href=`/${article.type}/${article.slug}`>{article.title}</a>
-        <AuthorInfo author={author} published={published}/>
+        <AuthorInfoVariant published={published}/>
     </section>
 </article>
 
