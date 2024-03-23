@@ -3,15 +3,16 @@ const {article} = Astro.props
 import AuthorInfo from "./AuthorInfo.astro";
 import { getAuthorById } from "../lib/api";
 import { dateFormatter } from "../lib/utils/dateFormatter";
+import { Image } from "astro:assets";
 const author = await getAuthorById(article.created_by_id)
 const published = dateFormatter(article.published_at)
 ---
 
 <main>
-    <section>
+    <section class="flex gap-4">
         <a href=`/${article.type}` title={article.type} id="article-type">{article.type.toUpperCase()}</a>
         <a id="title" href=`/${article.type}/${article.slug}` title={article.title}>{article.title}</a>
-        <p>{article.body.substring(0, 100)} ...</p>
+        <p class=" text-base mb-4">{article.body.substring(0, 100)} ...</p>
         <div>
         <a href=`/${article.type}/${article.slug}`  class="animated-button">
             <svg xmlns="http://www.w3.org/2000/svg" class="arr-2" viewBox="0 0 24 24">
@@ -31,7 +32,7 @@ const published = dateFormatter(article.published_at)
     </div>
     </section>
     <a href=`/${article.type}/${article.slug}` title={article.title}>
-      <img loading="lazy" src={article.img} alt={article.img_alternate}/>
+      <Image width={700} height={300} src={article.img} alt={article.img_alternate}/>
     </a>
 </main>
 
@@ -47,13 +48,6 @@ const published = dateFormatter(article.published_at)
             display: flex;
             flex-direction: column; /* Cambia a 2 columnas cuando el ancho de la pantalla sea menor o igual a 768px */
         }
-    }
-
-    img{
-        max-width: 450px;
-        max-height: 300px;
-        height: auto;
-        width: auto;
     }
     section{
         display: flex;

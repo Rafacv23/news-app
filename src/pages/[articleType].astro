@@ -20,12 +20,12 @@ import { firstLetterUpperCase } from "../lib/utils/dateFormatter";
 
 <Layout title={firstLetterUpperCase(articleType)}>
   <main>
-    <h1>{articleType.toUpperCase()}</h1>
+    <h1 class="text-xl text-teal-300 mb-4">{articleType.toUpperCase()}</h1>
             <ul>
                 {articles.map((articulo) => (
                     <Article article={articulo}/>
                 ))}
-        </ul>
+            </ul>
         <PageControls pageType={articleType} pageNum = 1/>
     </main>
 </Layout>

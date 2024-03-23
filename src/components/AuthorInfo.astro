@@ -1,11 +1,13 @@
 ---
+import { Image } from "astro:assets"
+
 const {author, published} = Astro.props
 ---
 
-<section id="author-info">
-    <img loading="lazy" src={author.avatar} width="46px" height="46px" alt=`${author.name} avatar` />
+<section id="author-info" >
+          <Image src={author.avatar} width="46" height="46" alt=`${author.name} avatar` />
         <div>
-            <h4 id="author-name" class="author">{author.name}</h4>
+            <h4 id="author-name" class="author text-xs">{author.name}</h4>
             <h4 class="author">{published}</h4>
         </div>
 </section>

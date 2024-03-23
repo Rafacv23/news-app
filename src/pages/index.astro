@@ -24,8 +24,8 @@ const rest = articles.slice(1,4)
 	<main>
 		<FirstArticle article={firstArticle}/>
 	<section>
-	<h3>Últimos posts</h3>
-		<ul>
+	<h2 class="text-xl mb-4">Últimos posts</h2>
+		<ul class="fex-col sm:grid sm:grid-cols-2 md:grid-cols-3 gap-4">
 			{rest.map((articulo) =>(
 				<ArticleList article={articulo}/>
 			))}
@@ -34,7 +34,7 @@ const rest = articles.slice(1,4)
 	<FirstArticle article={lastNew}/>
 	<section>
 		<a href="/noticias" title="Noticias">Últimas Noticias</a>
-		<ul>
+		<ul class="fex-col sm:grid sm:grid-cols-2 md:grid-cols-3 gap-4">
 			{restNews.map((articulo) =>(
 				<ArticleList article={articulo}/>
 			))}
@@ -42,8 +42,8 @@ const rest = articles.slice(1,4)
 	</section>
 	<FirstArticle article={lastReview}/>
 	<section>
-	<a href="/analisis" title="Análisis">Últimos Análisis</a>
-		<ul>
+	<a href="/analisis" title="Análisis" class="text-xl mb-4">Últimos Análisis</a>
+		<ul class="fex-col sm:grid sm:grid-cols-2 md:grid-cols-3 gap-4">
 			{restReviews.map((articulo) =>(
 				<ArticleList article={articulo}/>
 			))}
@@ -51,8 +51,8 @@ const rest = articles.slice(1,4)
 	</section>
 	<FirstArticle article={lastArticle}/>
 	<section>
-		<a href="/articulos" title="Artículos">Últimos Artículos</a>
-		<ul>
+		<a href="/articulos" title="Artículos" class="text-xl mb-4">Últimos Artículos</a>
+		<ul class="fex-col sm:grid sm:grid-cols-2 md:grid-cols-3 gap-4">
 			{restArticles.map((articulo) =>(
 				<ArticleList article={articulo}/>
 			))}
@@ -60,28 +60,3 @@ const rest = articles.slice(1,4)
 	</section>
 	</main>
 </Layout>
-
-<style>
-	section{
-		background: radial-gradient(to top, #05050a 80%, white);
-	}
-ul {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Crea 3 columnas de igual ancho por defecto */
-    grid-gap: 20px;
-}
-
-@media screen and (max-width: 1000px) {
-    ul {
-        grid-template-columns: repeat(2, 1fr); /* Cambia a 2 columnas cuando el ancho de la pantalla sea menor o igual a 768px */
-    }
-}
-
-@media screen and (max-width: 700px) {
-    ul {
-        display: flex;
-		flex-direction: column; /* Cambia a 1 columna cuando el ancho de la pantalla sea menor o igual a 480px */
-    }
-}
-
-</style>

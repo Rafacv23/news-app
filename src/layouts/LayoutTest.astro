@@ -4,9 +4,9 @@ interface Props {
 }
 
 const { title } = Astro.props;
-import Header from "../components/Header.astro"
 import Footer from "../components/Footer.astro"
 import { ViewTransitions } from "astro:transitions";
+import Header from "../components/Header.astro";
 ---
 
 <!doctype html>
@@ -74,6 +74,10 @@ import { ViewTransitions } from "astro:transitions";
 
 	ul{
 		padding: 0;
+	}
+
+	a:hover{
+		color: #FECF02;
 	}
 	img{
 		border-radius: 0.5rem;
