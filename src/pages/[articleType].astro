@@ -14,11 +14,11 @@ import {getArticlesByType} from "../lib/api.js"
 const articles = await getArticlesByType(articleType)
 import Layout from "../layouts/Layout.astro"
 import Article from '../components/Article.astro'
-import Categorias from "../components/Categorias.astro";
 import PageControls from '../components/PageControls.astro';
+import { firstLetterUpperCase } from "../lib/utils/dateFormatter";
 ---
 
-<Layout title={articleType}>
+<Layout title={firstLetterUpperCase(articleType)}>
   <main>
     <h1>{articleType.toUpperCase()}</h1>
             <ul>
