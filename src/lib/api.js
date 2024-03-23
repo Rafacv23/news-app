@@ -157,3 +157,22 @@ export const getArticlesByPageAndType = async (page, type) => {
   console.log(articulos)
   return articulos
 }
+
+export const getRelatedArticles = async (type, articleId) => {
+  // función que recoge los artículos de la api en función del tipo que estos tengan asignado.
+
+  let { data: articulos, error } = await supabase
+    .from("articulos")
+    .select("*")
+    .eq("type", type)
+    .limit(3)
+    .order("published_at", { ascending: false })
+    .neq("id", articleId)
+
+  if (error) {
+    console.log(error)
+  }
+
+  console.log(articulos)
+  return articulos
+}
