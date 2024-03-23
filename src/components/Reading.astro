@@ -1,11 +1,12 @@
 ---
-import Layout from "../layouts/Layout.astro"
 import { getAuthorById } from "../lib/api"
 import { dateFormatter } from "../lib/utils/dateFormatter"
 import AuthorInfo from "./AuthorInfo.astro"
 import { unified } from 'unified'
 import remarkParse from 'remark-parse'
 import remarkHtml from 'remark-html'
+import Layout from "../layouts/Layout.astro"
+import RelatedPosts from '../components/RelatedPosts.astro'
 
 const {article} = Astro.props
 const author = await getAuthorById(article.created_by_id)
@@ -24,6 +25,7 @@ const htmlContent = await processor.process(article.body)
         <h3>Aqui deberia ir un subtitulo // añadir a la base de datos</h3>
         <AuthorInfo author={author} published={published}/>
         <article>{htmlContent}</article>
+        <RelatedPosts type={article.type} id={article.id}/>
     </main>
 </Layout>
 
@@ -38,11 +40,16 @@ const htmlContent = await processor.process(article.body)
         font-weight: bold;
     }
 
+    h1{
+        color: #FECF02;
+    }
+
     #article-type:hover{
         text-decoration: underline;
     }
 
     article{
-        max-width: 1200px;
+        border-bottom: 2px solid #6ADFCD;
+        padding-bottom: 2rem;
     }
 </style>
