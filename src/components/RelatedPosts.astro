@@ -1,0 +1,60 @@
+---
+import {getRelatedArticles} from '../lib/api.js'
+import { dateFormatter } from '../lib/utils/dateFormatter'
+const {id, type} = Astro.props
+
+const relatedArticles = await getRelatedArticles(type, id)
+---
+
+<section>
+    <h2>Recomendamos</h2>
+    <ul>
+        {relatedArticles.map((article) => (
+            <a href={`/${article.type}/${article.slug}`} id={article.id}>
+                <h4>{article.type.toUpperCase()}</h4>
+                <img loading="lazy" src={article.img} alt={article.img_alternate}/>
+                <h3>{article.title}</h3>
+                <p>{dateFormatter(article.published_at)}</p>
+            </a>
+        ))}
+    </ul>
+</section>
+
+<style>
+    section{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 1rem 
+    }
+
+    a{
+        padding: .5rem 1rem;
+        border-radius: .5rem;
+        transition: .5s;
+    }
+
+    a:hover{
+        background-color: black;
+        transition: .5s;
+        color: white;
+        background: linear-gradient(to bottom, rgba(5, 5, 10, 0.8), rgba(5, 5, 10, 1)); /* Gradiente de opacidad */
+    }
+    h4{
+        color: #6ADFCD;
+    }
+    h3{
+        color: #FECF02;
+    }
+    img{
+        width: 320px;
+        height: 180px;
+    }
+    ul{
+        display: flex;
+        flex-direction: row;
+        margin-top: 1rem;
+        gap: 2rem;
+    }
+</style>
