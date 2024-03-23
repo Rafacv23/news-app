@@ -10,7 +10,7 @@ const published = dateFormatter(article.published_at)
 <main>
     <section>
         <a href=`/${article.type}` title={article.type} id="article-type">{article.type.toUpperCase()}</a>
-        <a id="title" href=`/${article.type}/${article.slug}`>{article.title}</a>
+        <a id="title" href=`/${article.type}/${article.slug}` title={article.title}>{article.title}</a>
         <p>{article.body.substring(0, 100)} ...</p>
         <div>
         <a href=`/${article.type}/${article.slug}`  class="animated-button">
@@ -27,11 +27,12 @@ const published = dateFormatter(article.published_at)
               ></path>
             </svg>
           </a>
-          
         <AuthorInfo author={author} published={published}/>
     </div>
     </section>
-    <img loading="lazy" src={article.img} alt={article.img_alternate}/>
+    <a href=`/${article.type}/${article.slug}` title={article.title}>
+      <img loading="lazy" src={article.img} alt={article.img_alternate}/>
+    </a>
 </main>
 
 <style>
@@ -47,10 +48,12 @@ const published = dateFormatter(article.published_at)
             flex-direction: column; /* Cambia a 2 columnas cuando el ancho de la pantalla sea menor o igual a 768px */
         }
     }
+
     img{
         max-width: 450px;
         max-height: 300px;
         height: auto;
+        width: auto;
     }
     section{
         display: flex;
@@ -59,7 +62,12 @@ const published = dateFormatter(article.published_at)
     #title{
         font-size: 2rem;
         font-weight: bold;
+        color: #FECF02;
     }
+
+  a:hover{
+    text-decoration: underline;
+  }
     #article-type{
         color: #6ADFCD;
     }
