@@ -11,10 +11,10 @@ const relatedArticles = await getRelatedArticles(type, id)
     <h2 class=" mt-4">Recomendamos</h2>
     <ul class="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {relatedArticles.map((article) => (
-            <div class="card card card-image-cover"   id={article.id} >
-                <Image width="320" height="180" src={article.img} alt={article.img_alternate} />
+            <div class="card card-image-cover"   id={article.id} >
+                <Image id='img' width="320" height="180" src={article.img} alt={article.img_alternate} />
                 <div class="card-body">
-                    <h4>{article.type.toUpperCase()}</h4>
+                    <h4 class=" text-teal-300">{article.type.toUpperCase()}</h4>
                     <h2 class="card-header">{article.title}</h2>
                     <p class="text-content2">{dateFormatter(article.published_at)}</p>
                     <div class="card-footer">
@@ -27,10 +27,8 @@ const relatedArticles = await getRelatedArticles(type, id)
 </section>
 
 <style>
-    h4{
-        color: #6ADFCD;
-    }
-    h3{
-        color: #FECF02;
+    #img{
+        max-height: 180px;
+        width: auto;
     }
 </style>
