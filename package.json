@@ -13,6 +13,7 @@
     "@astrojs/tailwind": "^5.1.0",
     "@supabase/supabase-js": "^2.39.8",
     "astro": "^4.5.7",
+    "preline": "^2.0.3",
     "remark-html": "^16.0.1",
     "remark-parse": "^11.0.0",
     "rippleui": "^1.12.1",
