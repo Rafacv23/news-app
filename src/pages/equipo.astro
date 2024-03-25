@@ -1,0 +1,35 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import {equipo} from "../lib/equipo.js"
+---
+
+<Layout title="Equipo">
+    <main>
+        <h1 class="text-3xl my-8 text-teal-300 font-bold">¿Quiénes somos?</h1>
+        <article class="my-8 text-base">
+            ¡Bienvenidos a la Taberna Precursor! Somos más que una simple web de noticias de videojuegos; somos un espacio libre y abierto donde la pasión por los videojuegos se encuentra con la información más actualizada. En Taberna Precursor, creemos en la diversidad de opiniones y en la libertad de expresión. Nuestro objetivo es ofrecerte contenido de calidad, análisis profundos y cobertura exhaustiva de la industria de los videojuegos. Únete a nosotros mientras exploramos juntos el apasionante mundo de los videojuegos.
+        </article>
+        <h1 class="text-3xl my-8 text-teal-300 font-bold">¿Quiéres formar parte del equipo?</h1>
+        <article class="my-8 text-base">
+            En la Taberna Precursor, creemos en el poder de la colaboración y en el enriquecimiento mutuo que surge cuando personas apasionadas se unen para alcanzar un objetivo común. Si compartes nuestra pasión por los videojuegos y tienes un talento especial para la redacción, el análisis o la creación de contenido multimedia, ¡te invitamos a unirte a nuestro equipo! Estamos abiertos a recibir nuevos colaboradores que deseen contribuir con su voz única y sus habilidades al crecimiento de nuestra comunidad. Juntos, podemos continuar elevando el estándar de la cobertura de videojuegos y brindar a nuestros lectores una experiencia aún más enriquecedora. ¡Únete a nosotros y sé parte de esta emocionante aventura! <b>Escríbenos a rafacv23@gmail.com y nosotros nos pondremos en contacto contigo</b>.      </article>
+        <h2 class="text-2xl text-yellow-400 font-bold">Administración</h2>
+        <ul class="flex flex-col my-8">
+            {equipo.map((persona) => (
+                <li class="flex flex-col gap-4 md:items-center justify-center border-b-2 border-gray-600 mb-8">
+                    <img width={46} height={46} src={persona.avatar} alt={persona.nombre} />
+                    {persona.nombre} {persona.apellidos} | {persona.puesto}
+                    <ul class="flex gap-4 mb-8">
+                        {persona.rrss.map((rrss) => (
+                            <li id={rrss.nombre}>
+                                <a href={rrss.url} title={rrss.nombre}> 
+                                    <Image src={rrss.logo} alt={rrss.nombre} width={26} height={26} />
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </li>
+            ))}
+        </ul>
+    </main>
+</Layout>../lib/equipo.js
