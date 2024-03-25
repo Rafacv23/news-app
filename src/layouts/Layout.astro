@@ -26,6 +26,9 @@ import { ViewTransitions } from "astro:transitions";
 		<Footer/>
 	</body>
 </html>
+
+<script src="../../node_modules/preline/dist/preline.js"></script>
+
 <style is:global>
 	:root {
 		--accent: 136, 58, 234;
@@ -42,9 +45,8 @@ import { ViewTransitions } from "astro:transitions";
 		font-family: system-ui, sans-serif;
 		background-size: 224px;
 		color: white;
-		/*background: linear-gradient(135deg, #05050a 0%, #1a1a1a 100%);*/
-		/*background: radial-gradient(to bottom, #05050a 40%, white);*/
-		background-color: black;
+		background: linear-gradient(135deg, #05050a 0%, #1a1a1a 100%);
+		background: radial-gradient(to bottom, #05050a 40%, white);
 	}
 	main {
 		margin: auto;
