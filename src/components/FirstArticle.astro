@@ -1,5 +1,6 @@
 ---
 const {article} = Astro.props
+import '../lib/ui/animated-button.css'
 import AuthorInfo from "./AuthorInfo.astro";
 import { getAuthorById } from "../lib/api";
 import { dateFormatter } from "../lib/utils/dateFormatter";
@@ -8,13 +9,13 @@ const author = await getAuthorById(article.created_by_id)
 const published = dateFormatter(article.published_at);
 ---
 
-{article !== null ? 
-  <main>
-      <section class="flex gap-4">
+
+      <article class="flex flex-col gap-4 mb-8 mt-4 md:flex md:flex-row">
+        <section class="flex flex-col">
           <a href=`/${article.type}` title={article.type} id="article-type">{article.type.toUpperCase()}</a>
           <a id="title" href=`/${article.type}/${article.slug}` title={article.title}>{article.title}</a>
           <p class=" text-base mb-4">{article.body.substring(0, 100)} ...</p>
-          <div class="flex items-end justify-start gap-4">
+          <div class="flex items-center justify-start mt-4 gap-4 mx-auto">
           <a href=`/${article.type}/${article.slug}` class="animated-button max-w-3xl mx-auto">
               <svg xmlns="http://www.w3.org/2000/svg" class="arr-2" viewBox="0 0 24 24">
                 <path
@@ -31,35 +32,22 @@ const published = dateFormatter(article.published_at);
             </a>
           <AuthorInfo author={author} published={published}/>
           </div>
-          </section>
+        </section>
+        <section>
           <a href=`/${article.type}/${article.slug}` title={article.title}>
-            <Image width={700} height={300} src={article.img} alt={article.img_alternate}/>
+            <Image class='mt-4'  id='imagen' width={700} height={300} src={article.img} alt={article.img_alternate}/>
           </a>
-  </main>
-  : null
-}
+        </article>
 
 <style>
-    main{
-        display: flex;
-        margin-bottom: 3rem;
-        margin-top: 1.5rem;
-        gap: 2rem;
-    }
-    @media screen and (max-width: 1000px) {
-        main {
-            display: flex;
-            flex-direction: column; /* Cambia a 2 columnas cuando el ancho de la pantalla sea menor o igual a 768px */
-        }
-    }
-    section{
-        display: flex;
-        flex-direction: column;
-    }
     #title{
         font-size: 2rem;
         font-weight: bold;
         color: #FECF02;
+    }
+
+    #imagen{
+      max-height: 300px;
     }
 
   a:hover{
@@ -73,93 +61,4 @@ const published = dateFormatter(article.published_at);
         flex-direction: row;
         justify-content: space-between;
     }
-
-    .animated-button {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 16px 36px;
-  border: 4px solid;
-  border-color: transparent;
-  font-size: 16px;
-  background-color: ;
-  border-radius: 100px;
-  font-weight: 600;
-  color: aliceblue;
-  box-shadow: 0 0 0 2px #ffffff;
-  cursor: pointer;
-  overflow: hidden;
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.animated-button svg {
-  position: absolute;
-  width: 24px;
-  fill: aliceblue;
-  z-index: 9;
-  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.animated-button .arr-1 {
-  right: 16px;
-}
-
-.animated-button .arr-2 {
-  left: -25%;
-}
-
-.animated-button .circle {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 20px;
-  height: 20px;
-  background-color: #c5e5e4;
-  border-radius: 50%;
-  opacity: 0;
-  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.animated-button .text {
-  position: relative;
-  z-index: 1;
-  transform: translateX(-12px);
-  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.animated-button:hover {
-  box-shadow: 0 0 0 12px transparent;
-  color: #212121;
-  border-radius: 12px;
-}
-
-.animated-button:hover .arr-1 {
-  right: -25%;
-}
-
-.animated-button:hover .arr-2 {
-  left: 16px;
-}
-
-.animated-button:hover .text {
-  transform: translateX(12px);
-}
-
-.animated-button:hover svg {
-  fill: #1f387e;
-}
-
-.animated-button:active {
-  scale: 0.95;
-  box-shadow: 0 0 0 4px #6ADFCD;
-}
-
-.animated-button:hover .circle {
-  width: 220px;
-  height: 220px;
-  opacity: 1;
-}
-
 </style>
