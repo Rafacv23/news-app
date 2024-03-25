@@ -10,14 +10,17 @@ const author = await getAuthorById(article.created_by_id)
 const published = dateFormatter(article.published_at)
 ---
 
-<article class="flex flex-col sm:flex-row sm:gap-4 sm:mb-8 mb-4">
-    <Image src={article.img} alt={article.img_alternate} width="320" height="182" class="img"/>
-    <section>
-        <a href=`/${article.type}` title={article.type} id="article-type" class="text-teal-300 text-base">{article.type.toUpperCase()}</a>
-        <a id="title" class="text-2xl mb-4 text" href=`/${article.type}/${article.slug}`>{article.title}</a>
-        <AuthorInfo author={author} published={published}/>
-    </section>
-</article>
+{article ? 
+    <article class="flex flex-col sm:flex-row sm:gap-4 sm:mb-8 mb-4">
+        <Image src={article.img} alt={article.img_alternate} width="320" height="182" class="img"/>
+        <section>
+            <a href=`/${article.type}` title={article.type} id="article-type" class="text-teal-300 text-base hover:underline">{article.type.toUpperCase()}</a>
+            <a id="title" class="text-2xl mb-4 hover:text-yellow-400 hover:transition" href=`/${article.type}/${article.slug}`>{article.title}</a>
+            <AuthorInfo author={author} published={published}/>
+        </section>
+    </article>
+    : <div class="skeleton-pulse h-24"></div>
+}
 
 <style>
     section{
