@@ -4,7 +4,7 @@ import { Image } from "astro:assets"
 const {author, published} = Astro.props
 ---
 
-<section id="author-info" class=" mb-8 mt-4 max-w-3xl mx-auto" >
+<section id="author-info" class="max-w-3xl" >
           <Image src={author.avatar} width="46" height="46" alt=`${author.name} avatar` />
         <div>
             <h4 id="author-name" class="author text-xs">{author.name}</h4>
