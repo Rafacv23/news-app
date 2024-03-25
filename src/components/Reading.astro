@@ -5,8 +5,9 @@ import AuthorInfo from "./AuthorInfo.astro"
 import { unified } from 'unified'
 import remarkParse from 'remark-parse'
 import remarkHtml from 'remark-html'
-import Layout from "../layouts/Layout.astro"
 import RelatedPosts from '../components/RelatedPosts.astro'
+import { Image } from "astro:assets"
+import Layout from "../layouts/Layout.astro"
 
 const {article} = Astro.props
 const author = await getAuthorById(article.created_by_id)
@@ -19,12 +20,15 @@ const htmlContent = await processor.process(article.body)
 
 <Layout title={article.title}>
     <main>
-        <img id="cabecera-img" src={article.img} alt={article.img_alternate}/>
-        <a href={`/${article.type}`} title={article.type} id="article-type">{article.type.toUpperCase()}</a>
-        <h1>{article.title}</h1>
-        <h3>Aqui deberia ir un subtitulo // añadir a la base de datos</h3>
+        <section class="flex flex-col gap-4 max-w-3xl mx-auto">
+            <Image width={900} height={540} id="cabecera-img" src={article.img} alt={article.img_alternate}/>
+            <a href={`/${article.type}`} title={article.type} id="article-type">{article.type.toUpperCase()}</a>
+            <h1 class=" text-4xl">{article.title}</h1>
+            <h3>Aqui deberia ir un subtitulo // añadir a la base de datos</h3>
+        </section>
         <AuthorInfo author={author} published={published}/>
-        <article>{htmlContent}</article>
+        <div class="divider max-w-3xl mx-auto"></div>
+        <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-4 leading-relaxed">{htmlContent}</article>
         <RelatedPosts type={article.type} id={article.id}/>
     </main>
 </Layout>
