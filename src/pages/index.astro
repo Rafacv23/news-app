@@ -33,7 +33,7 @@ const rest = articles.slice(1,4)
 	</section>
 	<FirstArticle article={lastNew}/>
 	<section>
-		<a href="/noticias" title="Noticias">Últimas Noticias</a>
+		<a href="/noticias" title="Noticias" class="text-xl mb-4 hover:underline">Últimas Noticias</a>
 		<ul class="fex-col sm:grid sm:grid-cols-2 md:grid-cols-3 gap-4">
 			{restNews.map((articulo) =>(
 				<ArticleList article={articulo}/>
@@ -42,7 +42,7 @@ const rest = articles.slice(1,4)
 	</section>
 	<FirstArticle article={lastReview}/>
 	<section>
-	<a href="/analisis" title="Análisis" class="text-xl mb-4">Últimos Análisis</a>
+	<a href="/analisis" title="Análisis" class="text-xl mb-4 hover:underline">Últimos Análisis</a>
 		<ul class="fex-col sm:grid sm:grid-cols-2 md:grid-cols-3 gap-4">
 			{restReviews.map((articulo) =>(
 				<ArticleList article={articulo}/>
@@ -50,13 +50,15 @@ const rest = articles.slice(1,4)
 		</ul>
 	</section>
 	<FirstArticle article={lastArticle}/>
-	<section>
-		<a href="/articulos" title="Artículos" class="text-xl mb-4">Últimos Artículos</a>
-		<ul class="fex-col sm:grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-			{restArticles.map((articulo) =>(
-				<ArticleList article={articulo}/>
-			))}
-		</ul>
-	</section>
+	{restArticles.length > 0 ?
+		<section>
+			<a href="/articulos" title="Artículos" class="text-xl mb-4 hover:underline">Últimos Artículos</a>
+			<ul class="fex-col sm:grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+				{restArticles.map((articulo) =>(
+					<ArticleList article={articulo}/>
+				))}
+			</ul>
+		</section>
+	: null}
 	</main>
 </Layout>
