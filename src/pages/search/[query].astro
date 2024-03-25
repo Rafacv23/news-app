@@ -12,7 +12,7 @@ articles = await searchEngine(query)
 
 <Layout title='Búsquedas'>
   <main>
-    <h1 class="text-2xl text-teal-300 mb-4 mt-4">Búsquedas</h1>
+    <h1 class="text-2xl font-bold text-teal-300 mb-4 mt-4">Búsquedas</h1>
             <ul>
                 {articles.map((articulo) => (
                     <Article article={articulo}/>
