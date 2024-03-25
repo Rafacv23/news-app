@@ -8,6 +8,7 @@ import remarkHtml from 'remark-html'
 import RelatedPosts from '../components/RelatedPosts.astro'
 import { Image } from "astro:assets"
 import Layout from "../layouts/Layout.astro"
+import ShareBtn from "./ShareBtn.astro"
 
 const {article} = Astro.props
 const author = await getAuthorById(article.created_by_id)
@@ -20,13 +21,16 @@ const htmlContent = await processor.process(article.body)
 
 <Layout title={article.title}>
     <main>
-        <section class="flex flex-col gap-4 max-w-3xl mx-auto">
+        <section class="flex flex-col gap-4 max-w-3xl mx-auto mb-4 mt-8">
             <Image width={900} height={540} id="cabecera-img" src={article.img} alt={article.img_alternate}/>
             <a href={`/${article.type}`} title={article.type} id="article-type">{article.type.toUpperCase()}</a>
             <h1 class=" text-4xl">{article.title}</h1>
             <h3>Aqui deberia ir un subtitulo // añadir a la base de datos</h3>
         </section>
-        <AuthorInfo author={author} published={published}/>
+        <section class="flex items-center max-w-3xl justify-between mx-auto">
+            <AuthorInfo author={author} published={published}/>
+            <ShareBtn/>
+        </section>
         <div class="divider max-w-3xl mx-auto"></div>
         <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-4 leading-relaxed">{htmlContent}</article>
         <RelatedPosts type={article.type} id={article.id}/>
@@ -41,11 +45,11 @@ const htmlContent = await processor.process(article.body)
     }
         #article-type{
         color: #6ADFCD;
-        font-weight: bold;
     }
 
     h1{
         color: #FECF02;
+        font-weight: bold;
     }
 
     #article-type:hover{
