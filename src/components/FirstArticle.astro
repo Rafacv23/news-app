@@ -9,7 +9,7 @@ const author = await getAuthorById(article.created_by_id)
 const published = dateFormatter(article.published_at);
 ---
 
-
+{article !== null ?
       <article class="flex flex-col gap-4 mb-8 mt-4 md:flex md:flex-row">
         <section class="flex flex-col">
           <a href=`/${article.type}` title={article.type} id="article-type">{article.type.toUpperCase()}</a>
@@ -38,6 +38,9 @@ const published = dateFormatter(article.published_at);
             <Image class='mt-4'  id='imagen' width={700} height={300} src={article.img} alt={article.img_alternate}/>
           </a>
         </article>
+        : null
+}
+
 
 <style>
     #title{
