@@ -7,13 +7,13 @@ import AuthorInfoVariant from './AuthorInfoVariant.astro'
 const published = dateFormatter(article.published_at)
 ---
 
-<article class="flex flex-col gap-4 mb-4">
+<article class="flex flex-col gap-4 mb-4 mt-4">
     <a href={`/${article.type}/${article.slug}`} title={article.title}>
         <Image width={300} height={150} src={article.img} alt={article.img_alternate} class="img"/>
     </a>
     <section class="flex flex-col">
-        <a class=" text-base text-teal-300" href=`/${article.type}` title={article.type} id="article-type">{article.type.toUpperCase()}</a>
-        <a class=" text-lg" id="title" href=`/${article.type}/${article.slug}`>{article.title}</a>
+        <a class=" text-base text-teal-300 hover:underline" href=`/${article.type}` title={article.type} id="article-type">{article.type.toUpperCase()}</a>
+        <a class=" text-lg hover:text-yellow-400 hover:transition" id="title" href=`/${article.type}/${article.slug}`>{article.title}</a>
         <AuthorInfoVariant published={published}/>
     </section>
 </article>
