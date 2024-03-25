@@ -33,7 +33,9 @@ export const getArticlesByType = async (type) => {
 
   let { data: articulos, error } = await supabase
     .from("articulos")
-    .select("*")
+    .select(
+      "id, title, type, published_at, created_by_id, img, img_alternate, slug, body" //Modificar body por metadescripción
+    )
     .eq("type", type)
     .limit(10)
     .order("published_at", { ascending: false })
@@ -49,7 +51,9 @@ export const getArticlesByType = async (type) => {
 export const getArticles = async () => {
   let { data: articulos, error } = await supabase
     .from("articulos")
-    .select("*")
+    .select(
+      "id, title, type, published_at, created_by_id, img, img_alternate, slug, body"
+    )
     .order("published_at", { ascending: false })
 
   if (error) {
@@ -63,7 +67,7 @@ export const getArticles = async () => {
 export const getAuthorById = async (id) => {
   let { data: redactores, error } = await supabase
     .from("redactores")
-    .select("*")
+    .select("id, name, avatar")
     .eq("id", id)
 
   if (error) {
@@ -78,7 +82,10 @@ export const getAuthorById = async (id) => {
 export const getArticleBySlug = async (slug) => {
   let { data: articulos, error } = await supabase
     .from("articulos")
-    .select("*")
+    .select(
+      "id, title, body, type, published_at, created_by_id, img, img_alternate"
+    )
+    .limit(1)
     .eq("slug", slug)
 
   if (error) {
@@ -106,7 +113,9 @@ export const searchEngine = async (query) => {
   try {
     let { data: articulos, error } = await supabase
       .from("articulos")
-      .select("*")
+      .select(
+        "id, title, body, type, published_at, created_by_id, slug, img, img_alternate"
+      )
       .ilike("title", `%${query}%`) // Utilizando el parámetro query para la búsqueda
 
     if (error) {
@@ -127,7 +136,9 @@ export const getArticlesByPage = async (page) => {
   const endIndex = startIndex + pageSize
   let { data: articulos, error } = await supabase
     .from("articulos")
-    .select("*")
+    .select(
+      "id, title, body, type, published_at, created_by_id, img, img_alternate"
+    )
     .order("published_at", { ascending: false })
     .limit(10)
     .range(startIndex, endIndex)
@@ -163,7 +174,9 @@ export const getRelatedArticles = async (type, articleId) => {
 
   let { data: articulos, error } = await supabase
     .from("articulos")
-    .select("*")
+    .select(
+      "id, title, body, type, published_at, created_by_id, img, img_alternate"
+    )
     .eq("type", type)
     .limit(3)
     .order("published_at", { ascending: false })
