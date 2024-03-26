@@ -14,4 +14,23 @@ export default defineConfig({
   site: "https://taberna-precursor.vercel.app/",
   integrations: [tailwind(), sitemap()],
   adapter: vercel(),
+
+  serialize(item) {
+    // Verifica si la URL es para una página dinámica
+    if (item.url.includes("/[articleType]/[slug]")) {
+      // Agrega cualquier lógica adicional que necesites para generar la URL del Sitemap
+      const dynamicUrl = `https://taberna-precursor.vercel.app${item.url}`
+
+      // Modifica el objeto SitemapItem con la URL dinámica
+      return {
+        ...item,
+        url: dynamicUrl,
+        changefreq: "weekly", // Puedes establecer la frecuencia de cambio según tus necesidades
+        lastmod: new Date(), // Puedes establecer la última modificación según tus necesidades
+        priority: 0.8, // Puedes establecer la prioridad según tus necesidades
+      }
+    }
+    // Si no es una página dinámica, devuelve el objeto SitemapItem sin modificar
+    return item
+  },
 })
