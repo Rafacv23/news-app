@@ -83,7 +83,7 @@ export const getArticleBySlug = async (slug) => {
   let { data: articulos, error } = await supabase
     .from("articulos")
     .select(
-      "id, title, body, type, published_at, created_by_id, img, img_alternate"
+      "id, title, body, type, published_at, created_by_id, img, img_alternate, slug"
     )
     .limit(1)
     .eq("slug", slug)
