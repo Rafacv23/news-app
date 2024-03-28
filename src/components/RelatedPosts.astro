@@ -14,8 +14,8 @@ const relatedArticles = await getRelatedArticles(collection, slug)
             <div class="card card-image-cover"   id={article.id} >
             <Image id='img' width="320" height="180" src={article.data.image.src} alt={article.data.image.alt} />
                 <div class="card-body">
-                    <h4 class=" text-teal-300">{article.collection.toUpperCase()}</h4>
-                    <h2 class="hover:cursor-pointer card-header hover:text-yellow-400 hover:transition">{article.data.title}</h2>
+                    <a title={article.collection} href={`/${article.collection}`} class=" text-teal-300 hover:underline">{article.collection.toUpperCase()}</a>
+                    <a title={article.data.title} href={`/${article.collection}/${article.slug}`} class="hover:cursor-pointer card-header hover:text-yellow-400 hover:transition">{article.data.title}</a>
                     <p class="text-content2">{dateFormatter(article.data.publishDate)}</p>
                     <div class="card-footer">
                         <a title={article.data.title} href={`/${article.collection}/${article.slug}`} class="btn btn-solid-warning">Leer más</a>

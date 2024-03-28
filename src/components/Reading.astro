@@ -5,11 +5,10 @@ import ShareBtn from "./ShareBtn.astro"
 
 const {entry} = Astro.props
 const { Content } = await entry.render();
-console.log(entry.slug);
 ---
 
     <main class="mx-auto max-w-3xl mt-24">
-        <Image src={entry.data.image.src} alt={entry.data.image.alt} width={750} height={400} class="mb-4" />
+        <Image src={entry.data.image.src} alt={entry.data.image.alt} width={750} height={400} class="mb-4 max-w-sm sm:max-w-xl md:max-w-full " />
         <span class=" text-teal-300 uppercase tracking-wider text-sm font-medium">
           {entry.collection}
         </span>
@@ -28,26 +27,27 @@ console.log(entry.slug);
             {entry.data.publishDate.toDateString()}
           </time>
           <span class="text-gray-400 hidden md:block">•</span>
-          <div class="w-full md:w-auto flex flex-wrap gap-3">
+          <div class="w-full md:w-auto flex flex-wrap gap-3 items-center">
             {
               entry.data.tags.map((tag) => (
                 <span class="text-sm text-gray-500">#{tag}</span>
               ))
             }
-          </div>
           <ShareBtn/>
+          </div>
         </div>
       </main>
-  
-      <div class="mx-auto prose prose-lg mt-6 max-w-3xl">
+      <div class="divider"></div>
+      <div class="lg:mx-auto prose prose-lg grid gap-6 mx-8 mt-6 max-w-3xl">
         <Content />
       </div>
       <div class="text-center mt-8">
         <a
           href="/analisis"
-          class=" bg-teal-300 px-5 py-3 rounded-md hover:bg-black transition"
+          class=" btn btn-solid-primary bg-teal-700 px-5 py-3 rounded-md text-teal-50 hover:bg-teal-600 transition"
           >← Volver a {entry.collection}</a
         >
+        <div class="divider mt-8"></div>
       </div>
       <RelatedPosts collection={entry.collection} slug={entry.slug}/>
 

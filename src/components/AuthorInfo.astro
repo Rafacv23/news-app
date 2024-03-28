@@ -7,7 +7,7 @@ const avatarAutorEncontrado = await getAuthorByName(author);
 ---
 
 <section id="author-info" class="max-w-3xl" >
-          <Image src={avatarAutorEncontrado.src} alt={avatarAutorEncontrado.alt} width="46" height="46" alt=`${author.author} avatar` />
+          <Image src={avatarAutorEncontrado.src} alt={avatarAutorEncontrado.alt} width="46" height="46" alt=`${author.author} avatar` class="avatar" />
         <div>
             <h4 id="author-name" class="author text-xs">{author.author}</h4>
             <h4 class="author">{published}</h4>
