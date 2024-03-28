@@ -1,7 +1,6 @@
 ---
 import RelatedPosts from '../components/RelatedPosts.astro'
 import { Image } from "astro:assets"
-import Layout from "../layouts/Layout.astro"
 import ShareBtn from "./ShareBtn.astro"
 
 const {entry} = Astro.props
@@ -9,7 +8,6 @@ const { Content } = await entry.render();
 console.log(entry.slug);
 ---
 
-<Layout title={entry.title}>
     <main class="mx-auto max-w-3xl mt-24">
         <Image src={entry.data.image.src} alt={entry.data.image.alt} width={750} height={400} class="mb-4" />
         <span class=" text-teal-300 uppercase tracking-wider text-sm font-medium">
@@ -52,7 +50,6 @@ console.log(entry.slug);
         >
       </div>
       <RelatedPosts collection={entry.collection} slug={entry.slug}/>
-</Layout>
 
 <style>
     #cabecera-img{
