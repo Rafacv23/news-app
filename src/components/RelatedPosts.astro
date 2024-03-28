@@ -1,28 +1,28 @@
 ---
 import { Image } from 'astro:assets'
-import {getRelatedArticles} from '../lib/api.js'
 import { dateFormatter } from '../lib/utils/dateFormatter'
-const {id, type} = Astro.props
+import { getRelatedArticles } from '../lib/api/getRelatedArticles'
+const {collection, slug} = Astro.props
 
-const relatedArticles = await getRelatedArticles(type, id)
+const relatedArticles = await getRelatedArticles(collection, slug)
 ---
 
 <section class="flex flex-col gap-8 items-center justify-center">
     <h2 class="mt-4 font-bold text-2xl">Recomendamos</h2>
     <ul class="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {relatedArticles.map((article) => (
+        {relatedArticles ? relatedArticles.map((article) => (
             <div class="card card-image-cover"   id={article.id} >
-                <Image id='img' width="320" height="180" src={article.img} alt={article.img_alternate} />
+            <Image id='img' width="320" height="180" src={article.data.image.src} alt={article.data.image.alt} />
                 <div class="card-body">
-                    <h4 class=" text-teal-300">{article.type.toUpperCase()}</h4>
-                    <h2 class="hover:cursor-pointer card-header hover:text-yellow-400 hover:transition">{article.title}</h2>
-                    <p class="text-content2">{dateFormatter(article.published_at)}</p>
+                    <h4 class=" text-teal-300">{article.collection.toUpperCase()}</h4>
+                    <h2 class="hover:cursor-pointer card-header hover:text-yellow-400 hover:transition">{article.data.title}</h2>
+                    <p class="text-content2">{dateFormatter(article.data.publishDate)}</p>
                     <div class="card-footer">
-                        <a title={article.title} href={`/${article.type}/${article.slug}`} class="btn btn-solid-warning">Leer más</a>
+                        <a title={article.data.title} href={`/${article.collection}/${article.slug}`} class="btn btn-solid-warning">Leer más</a>
                     </div>
                 </div>
             </div>
-        ))}
+        )) : null}
     </ul>
 </section>
 

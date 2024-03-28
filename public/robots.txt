@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://taberna-precursor.vercel.app/sitemap-index.xml  

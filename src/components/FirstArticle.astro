@@ -1,22 +1,19 @@
 ---
 const {article} = Astro.props
 import '../lib/ui/animated-button.css'
-import AuthorInfo from "./AuthorInfo.astro";
-import { getAuthorById } from "../lib/api";
 import { dateFormatter } from "../lib/utils/dateFormatter";
 import { Image } from "astro:assets";
-const author = await getAuthorById(article.created_by_id)
-const published = dateFormatter(article.published_at);
+import AuthorInfo from './AuthorInfo.astro';
+const published = dateFormatter(article.data.publishDate);
 ---
 
-{article !== null ?
   <article class="flex flex-col gap-4 mb-8 mt-4 md:flex md:flex-row">
     <section class="flex flex-col">
-      <a href={`/${article.type}`} title={article.type} id="article-type">{article.type.toUpperCase()}</a>
-      <a id="title" href={`/${article.type}/${article.slug}`} title={article.title}>{article.title}</a>
+      <a href={`/${article.collection}`} title={article.collection} id="article-type">{article.collection.toUpperCase()}</a>
+      <a id="title" href={`/${article.collection}/${article.slug}`} title={article.data.title}>{article.data.title}</a>
       <p class="text-base mb-4">{article.body.substring(0, 100)} ...</p>
       <div class="flex items-center justify-start mt-4 gap-4 mx-auto">
-        <a href={`/${article.type}/${article.slug}`} class="animated-button max-w-3xl mx-auto">
+        <a href={`/${article.collection}/${article.slug}`} class="animated-button max-w-3xl mx-auto">
           <svg xmlns="http://www.w3.org/2000/svg" class="arr-2" viewBox="0 0 24 24">
             <path
               d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
@@ -30,17 +27,16 @@ const published = dateFormatter(article.published_at);
             ></path>
           </svg>
         </a>
-        <AuthorInfo author={author} published={published}/>
+        <AuthorInfo published={published} author={article.data} />
       </div>
     </section>
     <section>
-      <a href={`/${article.type}/${article.slug}`} title={article.title}>
-        <Image class='mt-4'  id='imagen' width={700} height={300} src={article.img} alt={article.img_alternate}/>
+      <a href={`/${article.collection}/${article.slug}`} title={article.data.title}>
+        <Image class='mt-4'  id='imagen' width={700} height={300} src={article.data.image.src} alt={article.data.image.alt}/>
       </a>
     </section>
   </article>
-  : null
-}
+
 
 
 

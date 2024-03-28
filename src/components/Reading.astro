@@ -1,40 +1,57 @@
 ---
-import { getAuthorById } from "../lib/api"
-import { dateFormatter } from "../lib/utils/dateFormatter"
-import AuthorInfo from "./AuthorInfo.astro"
-import { unified } from 'unified'
-import remarkParse from 'remark-parse'
-import remarkHtml from 'remark-html'
 import RelatedPosts from '../components/RelatedPosts.astro'
 import { Image } from "astro:assets"
 import Layout from "../layouts/Layout.astro"
 import ShareBtn from "./ShareBtn.astro"
 
-const {article} = Astro.props
-const author = await getAuthorById(article.created_by_id)
-const published = dateFormatter(article.published_at)
-
-// Convertir Markdown a HTML
-const processor = unified().use(remarkParse).use(remarkHtml)
-const htmlContent = await processor.process(article.body)
+const {entry} = Astro.props
+const { Content } = await entry.render();
+console.log(entry.slug);
 ---
 
-<Layout title={article.title}>
-    <main>
-        <section class="flex flex-col gap-4 max-w-3xl mx-auto mb-4 mt-8">
-            <Image width={900} height={540} id="cabecera-img" src={article.img} alt={article.img_alternate}/>
-            <a href={`/${article.type}`} title={article.type} id="article-type">{article.type.toUpperCase()}</a>
-            <h1 class=" text-4xl">{article.title}</h1>
-            <h3>Aqui deberia ir un subtitulo // añadir a la base de datos</h3>
-        </section>
-        <section class="flex items-center max-w-3xl justify-between mx-auto">
-            <AuthorInfo author={author} published={published}/>
-            <ShareBtn/>
-        </section>
-        <div class="divider max-w-3xl mx-auto"></div>
-        <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-4 leading-relaxed">{htmlContent}</article>
-        <RelatedPosts type={article.type} id={article.id}/>
-    </main>
+<Layout title={entry.title}>
+    <main class="mx-auto max-w-3xl mt-24">
+        <Image src={entry.data.image.src} alt={entry.data.image.alt} width={750} height={400} class="mb-4" />
+        <span class=" text-teal-300 uppercase tracking-wider text-sm font-medium">
+          {entry.collection}
+        </span>
+        <h1
+          class="text-4xl lg:text-5xl font-bold lg:tracking-tight mt-1 lg:leading-tight">
+          {entry.data.title}
+        </h1>
+        <div class="flex gap-2 mt-3 items-center flex-wrap md:flex-nowrap">
+          <span class="text-gray-400">
+            {entry.data.author}
+          </span>
+          <span class="text-gray-400">•</span>
+          <time
+            class="text-gray-400"
+            datetime={entry.data.publishDate.toISOString()}>
+            {entry.data.publishDate.toDateString()}
+          </time>
+          <span class="text-gray-400 hidden md:block">•</span>
+          <div class="w-full md:w-auto flex flex-wrap gap-3">
+            {
+              entry.data.tags.map((tag) => (
+                <span class="text-sm text-gray-500">#{tag}</span>
+              ))
+            }
+          </div>
+          <ShareBtn/>
+        </div>
+      </main>
+  
+      <div class="mx-auto prose prose-lg mt-6 max-w-3xl">
+        <Content />
+      </div>
+      <div class="text-center mt-8">
+        <a
+          href="/analisis"
+          class=" bg-teal-300 px-5 py-3 rounded-md hover:bg-black transition"
+          >← Volver a {entry.collection}</a
+        >
+      </div>
+      <RelatedPosts collection={entry.collection} slug={entry.slug}/>
 </Layout>
 
 <style>

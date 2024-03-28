@@ -1,13 +1,15 @@
 ---
 import { Image } from "astro:assets"
+import {getAuthorByName} from '../lib/api/getAuthorByName.js'
 
 const {author, published} = Astro.props
+const avatarAutorEncontrado = await getAuthorByName(author);
 ---
 
 <section id="author-info" class="max-w-3xl" >
-          <Image src={author.avatar} width="46" height="46" alt=`${author.name} avatar` />
+          <Image src={avatarAutorEncontrado.src} alt={avatarAutorEncontrado.alt} width="46" height="46" alt=`${author.author} avatar` />
         <div>
-            <h4 id="author-name" class="author text-xs">{author.name}</h4>
+            <h4 id="author-name" class="author text-xs">{author.author}</h4>
             <h4 class="author">{published}</h4>
         </div>
 </section>

@@ -1,23 +1,54 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getArticles } from '../lib/api';
 import ArticleList from "../components/home/ArticleList.astro"
 import FirstArticle from '../components/FirstArticle.astro'
-import { getArticlesByType } from '../lib/api';
+import { getCollection } from "astro:content";
 
-const latestReviews = await getArticlesByType('analisis')
-const latestArticles = await getArticlesByType('articulos')
-const latestNews = await getArticlesByType('noticias')
+const publishedReviewEntries = await getCollection("analisis", ({ data }) => {
+  return !data.draft && data.publishDate < new Date();
+});
 
-const articles = await getArticles()
-const firstArticle = articles[0]
-const lastNew = latestNews[0]
-const restNews = latestNews.slice(1,4)
-const lastReview = latestReviews[0]
-const restReviews = latestReviews.slice(1,4)
-const lastArticle = latestArticles[0]
-const restArticles = latestArticles.slice(1,4)
-const rest = articles.slice(1,4)
+// Sort content entries by publication date
+publishedReviewEntries.sort(function (a, b) {
+  return b.data.publishDate.valueOf() - a.data.publishDate.valueOf();
+});
+
+const publishedArticleEntries = await getCollection("articulos", ({ data }) => {
+  return !data.draft && data.publishDate < new Date();
+});
+
+// Sort content entries by publication date
+publishedArticleEntries.sort(function (a, b) {
+  return b.data.publishDate.valueOf() - a.data.publishDate.valueOf();
+});
+
+const publishedNewsEntries = await getCollection("noticias", ({ data }) => {
+  return !data.draft && data.publishDate < new Date();
+});
+
+// Sort content entries by publication date
+publishedNewsEntries.sort(function (a, b) {
+  return b.data.publishDate.valueOf() - a.data.publishDate.valueOf();
+});
+
+// Combine all entries into one array
+const allPublishedEntries = publishedNewsEntries.concat(publishedArticleEntries, publishedReviewEntries);
+
+// Sort combined entries by publication date
+allPublishedEntries.sort(function (a, b) {
+  return b.data.publishDate.valueOf() - a.data.publishDate.valueOf();
+});
+
+const firstArticle = allPublishedEntries[0]
+console.log(firstArticle);
+
+const rest = allPublishedEntries.slice(1,4)
+const lastReview = publishedReviewEntries[0]
+const lastNew = publishedNewsEntries[0]
+const lastArticle = publishedArticleEntries[0]
+const restArticles = publishedArticleEntries.slice(1,4)
+const restNews = publishedNewsEntries.slice(1,4)
+const restReviews = publishedReviewEntries.slice(1,4)
 ---
 
 <Layout title="Taberna Precursor | Noticias de Videojuegos">

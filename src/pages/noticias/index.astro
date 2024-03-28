@@ -1,0 +1,23 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import ArticlesDisplay from "../../components/ArticlesDisplay.astro";
+
+// Filter blog entries with 'draft: false' & date before current date
+const publishedNewsEntries = await getCollection("noticias", ({ data }) => {
+  return !data.draft && data.publishDate < new Date();
+});
+
+// Sort content entries by publication date
+publishedNewsEntries.sort(function (a, b) {
+  return b.data.publishDate.valueOf() - a.data.publishDate.valueOf();
+});
+---
+
+<Layout title="Noticias">
+  <Fragment slot="title">Our Blog</Fragment>
+      <Fragment slot="desc">
+        We write about building startups and thoughts going on our mind.
+      </Fragment>
+      <ArticlesDisplay entries={publishedNewsEntries}/>
+</Layout>

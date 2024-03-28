@@ -1,0 +1,21 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Reading from "../../components/Reading.astro";
+
+// Generate a new path for every collection entry
+export async function getStaticPaths() {
+  const newsEntries = await getCollection("noticias");
+  return newsEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+// Get the entry directly from the prop on render
+const { entry } = Astro.props;
+---
+
+<Layout title={entry.data.title}>
+  <Reading entry={entry}/>
+</Layout>

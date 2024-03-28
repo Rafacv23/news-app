@@ -1,0 +1,51 @@
+---
+import { Picture } from "astro:assets";
+const {entries} = Astro.props
+---
+
+<main class="mt-24">
+    <ul class="grid gap-16 max-w-4xl mx-auto">
+      {
+        entries.map((entry, index) => (
+          <li>
+            <a href={`/${entry.collection}/${entry.slug}`} title={`/${entry.collection}/${entry.slug}`}>
+              <div class="flex flex-col items-start md:flex-row gap-5 md:gap-10 md:items-center">
+                <a href={`/${entry.collection}/${entry.slug}`} title={`/${entry.collection}/${entry.slug}`}>
+                <Picture
+                  src={entry.data.image.src}
+                  alt={entry.data.image.alt}
+                  width={320}
+                  height={182}
+                  loading={index <= 2 ? "eager" : "lazy"}
+                  decoding={index <= 2 ? "sync" : "async"}
+                  class="w-full rounded-md object-cover object-center bg-white"
+                />
+                </a>
+                <div>
+                  <span class=" text-teal-300 uppercase tracking-wider text-sm font-medium">
+                    {entry.collection}
+                  </span>
+                  <a href={`/${entry.collection}/${entry.slug}`} title={`/${entry.collection}/${entry.slug}`}>
+                  <h2 class="text-3xl font-semibold leading-snug tracking-tight mt-1 hover:text-yellow-400 hover:transition ">
+                    {entry.data.title}
+                  </h2>
+                </a>
+                  <div class="flex gap-2 mt-3">
+                    <span class="text-gray-400">
+                      {entry.data.author}
+                    </span>
+                    <span class="text-gray-400">• </span>
+                    <time
+                      class="text-gray-400"
+                      datetime={entry.data.publishDate.toISOString()}>
+                      {entry.data.publishDate.toDateString()}
+                    </time>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </main>
