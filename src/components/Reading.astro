@@ -7,8 +7,8 @@ const {entry} = Astro.props
 const { Content } = await entry.render();
 ---
 
-    <main class="mx-auto max-w-3xl mt-24">
-        <Image src={entry.data.image.src} alt={entry.data.image.alt} width={750} height={400} class="mb-4 max-w-sm sm:max-w-xl md:max-w-full " />
+    <article class=" max-w-3xl mt-24 mx-9 md:mx-auto">
+        <Image src={entry.data.image.src} alt={entry.data.image.alt} width={750} height={400} class="mb-4" />
         <span class=" text-teal-300 uppercase tracking-wider text-sm font-medium">
           {entry.collection}
         </span>
@@ -36,20 +36,20 @@ const { Content } = await entry.render();
           <ShareBtn/>
           </div>
         </div>
-      </main>
-      <div class="divider"></div>
-      <div class="lg:mx-auto prose prose-lg grid gap-6 mx-8 mt-6 max-w-3xl">
-        <Content />
-      </div>
-      <div class="text-center mt-8">
-        <a
+        <div class="divider"></div>
+        <div class="lg:mx-auto prose prose-lg grid gap-6 mt-6 max-w-3xl">
+          <Content />
+        </div>
+        <div class="text-center mt-8">
+          <a
           href="/analisis"
           class=" btn btn-solid-primary bg-teal-700 px-5 py-3 rounded-md text-teal-50 hover:bg-teal-600 transition"
           >← Volver a {entry.collection}</a
-        >
-        <div class="divider mt-8"></div>
-      </div>
-      <RelatedPosts collection={entry.collection} slug={entry.slug}/>
+          >
+          <div class="divider mt-8"></div>
+        </div>
+        <RelatedPosts collection={entry.collection} slug={entry.slug}/>
+      </article>
 
 <style>
     #cabecera-img{
