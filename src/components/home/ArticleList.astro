@@ -3,20 +3,24 @@ const {article} = Astro.props
 import { Image } from 'astro:assets'
 import {dateFormatter} from '../../lib/utils/dateFormatter.js'
 import AuthorInfoVariant from './AuthorInfoVariant.astro'
+import ArticleListSkeleton from '../loader/ArticleListSkeleton.astro'
 
 const published = dateFormatter(article.data.publishDate)
 ---
 
-<article class="flex flex-col gap-4 mb-4 mt-4">
-    <a href={`/${article.collection}/${article.slug}`} title={article.data.title}>
-        <Image width={300} height={150} src={article.data.image.src} alt={article.data.image.alt} class="img"/>
-    </a>
-    <section class="flex flex-col">
-        <a class=" text-base text-teal-300 hover:underline" href=`/${article.collection}` title={article.collection} id="article-type">{article.collection.toUpperCase()}</a>
-        <a class=" text-lg hover:text-yellow-400 hover:transition" id="title" href=`/${article.collection}/${article.slug}`>{article.data.title}</a>
-        <AuthorInfoVariant published={published}/>
-    </section>
-</article>
+{article ? 
+    <article class="flex flex-col gap-4 mb-4 mt-4">
+        <a href={`/${article.collection}/${article.slug}`} title={article.data.title}>
+            <Image width={300} height={150} src={article.data.image.src} alt={article.data.image.alt} class="img"/>
+        </a>
+        <section class="flex flex-col">
+            <a class=" text-base text-teal-300 hover:underline" href=`/${article.collection}` title={article.collection} id="article-type">{article.collection.toUpperCase()}</a>
+            <a class=" text-lg hover:text-yellow-400 hover:transition" id="title" href=`/${article.collection}/${article.slug}`>{article.data.title}</a>
+            <AuthorInfoVariant published={published}/>
+        </section>
+    </article>
+    : <ArticleListSkeleton/>
+}
 
 <style>
     .img{
