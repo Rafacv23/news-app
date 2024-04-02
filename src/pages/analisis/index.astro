@@ -7,6 +7,6 @@ import { getPosts } from "../../lib/api/get-posts";
 const publishedReviewEntries = await getPosts('analisis')
 ---
 
-<Layout title="Análisis">
+<Layout title="Análisis" description="Últimos análisis sobre videojuegos de la Taberna Precursor, tu web de confianza sobre videojuegos.">
     <ArticlesDisplay entries={publishedReviewEntries}/>
 </Layout>

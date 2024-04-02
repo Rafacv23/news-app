@@ -21,7 +21,7 @@ const resultados = allPublishedEntries.filter(entry => entry.data.title.toLowerC
 ---
 
 
-<Layout title=`Resultados de búsqueda para ${query}`>
+<Layout title=`Resultados de búsqueda para ${query}` description='Busca tus entradas favoritas.'>
     <main>
         <h1 class="text-2xl font-bold mb-4">{`Resultados de búsqueda para ${query}`}</h1>
         {resultados.length > 0 ? 
