@@ -16,6 +16,6 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 ---
 
-<Layout title={entry.data.title} description={entry.data.snippet}>
+<Layout title={`${entry.data.title} | Taberna Precursor`} description={entry.data.snippet}>
   <Reading entry={entry}/>
 </Layout>
