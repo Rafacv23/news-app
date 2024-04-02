@@ -1,0 +1,31 @@
+---
+export const prerender = false
+import ArticlesDisplay from '../../components/ArticlesDisplay.astro';
+import Layout from '../../layouts/Layout.astro'
+const {query} = Astro.params
+import { getPosts } from '../../lib/api/get-posts.js';
+
+const publishedReviewEntries = await getPosts('analisis')
+const publishedArticleEntries = await getPosts('articulos')
+const publishedNewsEntries = await getPosts('noticias')
+
+// Combine all entries into one array
+const allPublishedEntries = publishedNewsEntries.concat(publishedArticleEntries, publishedReviewEntries);
+
+// Sort combined entries by publication date
+allPublishedEntries.sort(function (a, b) {
+  return b.data.publishDate.valueOf() - a.data.publishDate.valueOf();
+});
+
+const resultados = allPublishedEntries.filter(entry => entry.data.title.toLowerCase().includes(query.toLowerCase()));
+---
+
+
+<Layout title=`Resultados de búsqueda para ${query}`>
+    <main>
+        <h1 class="text-2xl font-bold mb-4">{`Resultados de búsqueda para ${query}`}</h1>
+        {resultados.length > 0 ? 
+        <ArticlesDisplay entries={resultados} />
+        : `No se han encontrado entradas`}
+    </main>
+</Layout>
