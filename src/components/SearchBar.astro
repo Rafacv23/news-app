@@ -1,0 +1,15 @@
+<form class="flex gap-4" id="search-form">
+    <input class="input input-solid" type="search" name="query" id="query" placeholder="Noticias, artículos, análisis..." required min="2" max="25"/>
+    <input class="btn btn-solid-primary" type="submit" name="submit" id="submit" value="Buscar"/>
+</form>
+
+<script>
+    const searchForm = document.getElementById("search-form");
+
+    searchForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const searchTerm = document.getElementById("query").value;
+        window.location.href = `/search/${searchTerm}`
+    })
+</script>
+
