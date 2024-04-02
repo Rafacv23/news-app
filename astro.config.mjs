@@ -1,20 +1,22 @@
-import { defineConfig } from "astro/config";
-import tailwind from "@astrojs/tailwind";
-import sitemap from "@astrojs/sitemap";
-import vercelStatic from "@astrojs/vercel/static";
+import { defineConfig } from "astro/config"
+import tailwind from "@astrojs/tailwind"
+import sitemap from "@astrojs/sitemap"
 
-import react from "@astrojs/react";
+import vercel from "@astrojs/vercel/serverless"
 
 // https://astro.build/config
 export default defineConfig({
   prefetch: true,
   prefetch: {
-    defaultStrategy: "tap"
+    defaultStrategy: "tap",
   },
   site: "https://taberna-precursor.vercel.app/",
-  integrations: [tailwind(), sitemap({
-    filter: page => page !== "https://taberna-precursor.vercel.app/test/"
-  }), react()],
-  output: "static",
-  adapter: vercelStatic()
-});
+  integrations: [
+    tailwind(),
+    sitemap({
+      filter: (page) => page !== "https://taberna-precursor.vercel.app/test/",
+    }),
+  ],
+  output: "hybrid",
+  adapter: vercel(),
+})
