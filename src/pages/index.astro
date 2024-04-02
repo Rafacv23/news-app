@@ -2,46 +2,16 @@
 import Layout from '../layouts/Layout.astro';
 import ArticleList from "../components/home/ArticleList.astro"
 import FirstArticle from '../components/FirstArticle.astro'
-import { getCollection } from "astro:content";
+import { getPosts } from '../lib/api/get-posts.js';
+import { getAllPosts } from '../lib/api/get-all-posts.js';
 
-const publishedReviewEntries = await getCollection("analisis", ({ data }) => {
-  return !data.draft && data.publishDate < new Date();
-});
+const publishedReviewEntries = await getPosts('analisis')
+const publishedArticleEntries = await getPosts('articulos')
+const publishedNewsEntries = await getPosts('noticias')
 
-// Sort content entries by publication date
-publishedReviewEntries.sort(function (a, b) {
-  return b.data.publishDate.valueOf() - a.data.publishDate.valueOf();
-});
-
-const publishedArticleEntries = await getCollection("articulos", ({ data }) => {
-  return !data.draft && data.publishDate < new Date();
-});
-
-// Sort content entries by publication date
-publishedArticleEntries.sort(function (a, b) {
-  return b.data.publishDate.valueOf() - a.data.publishDate.valueOf();
-});
-
-const publishedNewsEntries = await getCollection("noticias", ({ data }) => {
-  return !data.draft && data.publishDate < new Date();
-});
-
-// Sort content entries by publication date
-publishedNewsEntries.sort(function (a, b) {
-  return b.data.publishDate.valueOf() - a.data.publishDate.valueOf();
-});
-
-// Combine all entries into one array
-const allPublishedEntries = publishedNewsEntries.concat(publishedArticleEntries, publishedReviewEntries);
-
-// Sort combined entries by publication date
-allPublishedEntries.sort(function (a, b) {
-  return b.data.publishDate.valueOf() - a.data.publishDate.valueOf();
-});
+const allPublishedEntries = await getAllPosts(publishedNewsEntries, publishedArticleEntries, publishedReviewEntries)
 
 const firstArticle = allPublishedEntries[0]
-console.log(firstArticle);
-
 const rest = allPublishedEntries.slice(1,4)
 const lastReview = publishedReviewEntries[0]
 const lastNew = publishedNewsEntries[0]

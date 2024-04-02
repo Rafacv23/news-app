@@ -1,23 +1,12 @@
 ---
-import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import ArticlesDisplay from "../../components/ArticlesDisplay.astro";
+import { getPosts } from "../../lib/api/get-posts";
 
 // Filter blog entries with 'draft: false' & date before current date
-const publishedReviewEntries = await getCollection("analisis", ({ data }) => {
-  return !data.draft && data.publishDate < new Date();
-});
-
-// Sort content entries by publication date
-publishedReviewEntries.sort(function (a, b) {
-  return b.data.publishDate.valueOf() - a.data.publishDate.valueOf();
-});
+const publishedReviewEntries = await getPosts('analisis')
 ---
 
 <Layout title="Análisis">
-      <Fragment slot="title">Our Blog</Fragment>
-      <Fragment slot="desc">
-        We write about building startups and thoughts going on our mind.
-      </Fragment>
     <ArticlesDisplay entries={publishedReviewEntries}/>
 </Layout>
