@@ -1,14 +1,14 @@
 ---
 draft: false
-title: "Noticia 1"
+title: "Hiroki Totoki se convierte en el CEO de PlayStation"
 snippet: "Ornare cum cursus laoreet sagittis nunc fusce posuere per euismod dis vehicula a, semper fames lacus maecenas dictumst pulvinar neque enim non potenti. Torquent hac sociosqu eleifend potenti."
 image:
   {
-    src: "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?&fit=crop&w=430&h=240",
+    src: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fassets.turbologo.com%2Fblog%2Fen%2F2021%2F07%2F07074824%2F35cd555af4ebd39da4fb51db778b3a30.jpg&f=1&nofb=1&ipt=ee33c2b2bad7664a349f00854358705377349f4835c11444cb27ce944d684481&ipo=images",
     alt: "full stack web development",
   }
 publishDate: "2022-11-08 11:39"
-category: "Tutorials"
+category: "Noticias"
 author: "Janette Lynch"
 tags: [webdev, tailwindcss, frontend]
 ---

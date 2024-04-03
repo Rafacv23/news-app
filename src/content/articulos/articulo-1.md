@@ -1,10 +1,10 @@
 ---
 draft: false
-title: "Articulo 1"
+title: "La relevancia histórica que tuvo Wii"
 snippet: "Ornare cum cursus laoreet sagittis nunc fusce posuere per euismod dis vehicula a, semper fames lacus maecenas dictumst pulvinar neque enim non potenti. Torquent hac sociosqu eleifend potenti."
 image:
   {
-    src: "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?&fit=crop&w=430&h=240",
+    src: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.nLqRQjsQ5Rw0BZB51KvbkQHaFq%26pid%3DApi&f=1&ipt=86f8b9553b731bc0f19808588ed1fd2ca8a556bd56a4a9aa88e7874584a69d65&ipo=images",
     alt: "full stack web development",
   }
 publishDate: "2022-11-08 11:39"

@@ -1,14 +1,11 @@
 ---
 draft: false
-title: "Noticia 2"
+title: "Xbox oficializa la compra de Activision-Blizzard-King"
 snippet: "Ornare cum cursus laoreet sagittis nunc fusce posuere per euismod dis vehicula a, semper fames lacus maecenas dictumst pulvinar neque enim non potenti. Torquent hac sociosqu eleifend potenti."
 image:
-  {
-    src: "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?&fit=crop&w=430&h=240",
-    alt: "full stack web development",
-  }
+  { src: "https://i.imgur.com/ZlCeyBq.jpeg", alt: "full stack web development" }
 publishDate: "2022-11-08 11:39"
-category: "Tutorials"
+category: "Noticias"
 author: "Janette Lynch"
 tags: [webdev, tailwindcss, frontend]
 ---
