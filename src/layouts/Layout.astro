@@ -3,9 +3,10 @@ interface Props {
 	title: string
 	description: string
 	canonical?: string
+	image?: string
 }
 
-const { title, description, canonical } = Astro.props;
+const { title, description, canonical, image } = Astro.props;
 import Header from "../components/Header.astro"
 import Footer from "../components/Footer.astro"
 import SEO from "../components/SEO.astro";
@@ -16,8 +17,10 @@ import  SpeedInsights  from "@vercel/speed-insights/astro"
 <!doctype html>
 <html lang="es">
 	<head>
-		<SEO title={title} description={description} canonical={canonical} />
+		<SEO title={title} description={description} canonical={canonical} image={image} />
 		<ViewTransitions />
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7329488569166267"
+     crossorigin="anonymous"></script>
 	</head>
 	<body>
 		<Header/>
