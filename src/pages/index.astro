@@ -26,7 +26,7 @@ const restReviews = publishedReviewEntries.slice(1,4)
 		<FirstArticle article={firstArticle}/>
 	<section>
 	<h2 class="text-xl mb-4">Últimos posts</h2>
-		<ul class="fex-col sm:grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+		<ul class="fex-col sm:grid lg:grid-cols-3 gap-4">
 			{rest.map((articulo) =>(
 				<ArticleList article={articulo}/>
 			))}
