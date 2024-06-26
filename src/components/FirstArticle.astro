@@ -7,7 +7,7 @@ import AuthorInfo from './AuthorInfo.astro';
 const published = dateFormatter(article.data.publishDate);
 ---
 
-  <article class="flex flex-col gap-4 mb-8 mt-4 md:flex md:flex-row">
+  <article class="flex flex-col gap-4 mb-8 mt-4 md:flex sm:flex-row">
     <section class="flex flex-col">
       <a href={`/${article.collection}`} title={article.collection} id="article-type">{article.collection.toUpperCase()}</a>
       <a id="title" href={`/${article.collection}/${article.slug}`} title={article.data.title}>{article.data.title}</a>

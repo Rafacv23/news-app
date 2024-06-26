@@ -1,6 +1,6 @@
 ---
 draft: false
-title: "El legado de la Nintendo 3DS: Una reflexión sobre su evolución tecnológica y su relevancia en la era de los smartphones"
+title: "El legado de Nintendo 3DS: Una reflexión sobre su evolución tecnológica y su relevancia"
 snippet: "El legado de la Nintendo 3DS"
 image:
   {
