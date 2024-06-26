@@ -4,7 +4,7 @@ title: "El legado de Nintendo 3DS: Una reflexión sobre su evolución tecnológi
 "
 snippet: "El legado de Nintendo 3DS"
 image: { src: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.bhphotovideo.com%2Fimages%2Fimages2500x2500%2Fnintendo_redsraaa_3ds_xl_game_system_1113511.jpg&f=1&nofb=1&ipt=227f6a28cf4e7a815c9cdc3f65e17a7b826dd8a3d6bbce43eb1006a4035df99d&ipo=images", alt: "Nintendo 3DS" }
-publishDate: "2024-06-26 11:39"
+publishDate: "2024-06-25 11:39"
 category: "Articulo"
 author: "Rafa Canosa"
 tags: [Nintendo, 3DS, Smartphone]
